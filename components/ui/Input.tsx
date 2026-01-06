@@ -2,37 +2,40 @@ import * as React from "react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-/**
- * Combina clases Tailwind sin duplicados.
- */
 function cn(...inputs: Array<string | undefined | null | false>) {
   return twMerge(clsx(inputs));
 }
 
-export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  error?: string;
+}
 
-/**
- * Input (BDatia)
- * - Base minimalista/institucional, con foco visible y estilo premium sobrio.
- * - Editá colores y bordes acá si querés ajustar la estética.
- */
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type = "text", ...props }, ref) => {
+  ({ className, type = "text", error, ...props }, ref) => {
     return (
-      <input
-        ref={ref}
-        type={type}
-        className={cn(
-           "h-11 w-full rounded-xl border bg-black/5 px-3 text-sm text-black",
-  "border-[#7A1F2B] placeholder:text-black/50",
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7A1F2B]/30 focus-visible:border-[#7A1F2B]",
-  "disabled:cursor-not-allowed disabled:opacity-50", 
-          className
-        )}
-        {...props}
-      />
+      <div className="space-y-1">
+        <input
+          ref={ref}
+          type={type}
+          className={cn(
+            // ✅ borde normal (acá podés dejarlo bordó si querés)
+            "h-11 w-full rounded-xl border bg-black/5 px-3 text-sm text-black",
+            "placeholder:text-black/50",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--gold)]",
+            "disabled:cursor-not-allowed disabled:opacity-50",
+            // ✅ si hay error, borde rojo
+            error && "border-red-500 focus-visible:ring-red-500",
+            // ✅ si NO hay error, tu borde suave actual
+            !error && "border-gold/10",
+            className
+          )}
+          {...props}
+        />
+        {error ? <p className="text-sm text-red-600">{error}</p> : null}
+      </div>
     );
   }
 );
 
 Input.displayName = "Input";
+
