@@ -67,7 +67,7 @@ export function Footer() {
         <div className="mt-8 pt-8 border-t border-muted/20">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
             <p className="text-muted text-sm">
-              © 2024 BDatia. Todos los derechos reservados.
+              © 2025 BDatia. Todos los derechos reservados.
             </p>
           </div>
         </div>
