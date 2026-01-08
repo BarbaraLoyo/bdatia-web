@@ -4,6 +4,8 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { scrollToSection } from '@/lib/utils'
+import LanguageSwitcher from '@/components/layout/LanguageSwitcher'
+
 
 const navigation = [
   { name: 'Servicios', href: '#servicios' },
@@ -45,8 +47,9 @@ export function Header() {
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* Desktop: Language + CTA */}
+          <div className="hidden md:flex items-center gap-3">
+            <LanguageSwitcher />
             <Button
               onClick={() => handleNavClick('#contacto')}
               variant="primary"
@@ -77,7 +80,12 @@ export function Header() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden border-t border-muted/20">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+            <div className="px-2 pt-2 pb-3 space-y-2">
+              {/* Mobile: Language Switcher */}
+              <div className="px-3 pt-2">
+                <LanguageSwitcher />
+              </div>
+
               {navigation.map((item) => (
                 <button
                   key={item.name}
@@ -87,6 +95,7 @@ export function Header() {
                   {item.name}
                 </button>
               ))}
+
               <div className="px-3 py-2">
                 <Button
                   onClick={() => handleNavClick('#contacto')}
