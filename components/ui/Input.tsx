@@ -1,40 +1,35 @@
+"use client";
+
 import * as React from "react";
-import { clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
 
-function cn(...inputs: Array<string | undefined | null | false>) {
-  return twMerge(clsx(inputs));
-}
-
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   error?: string;
-}
+};
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type = "text", error, ...props }, ref) => {
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className = "", error, ...props }, ref) => {
     return (
-      <div className="space-y-1">
+      <div className="w-full">
         <input
           ref={ref}
-          type={type}
-          className={cn(
-            // ✅ borde normal (acá podés dejarlo bordó si querés)
-            "h-11 w-full rounded-xl border bg-black/5 px-3 text-sm text-black",
-            "placeholder:text-black/50",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--gold)]",
-            "disabled:cursor-not-allowed disabled:opacity-50",
-            // ✅ si hay error, borde rojo
-            error && "border-red-500 focus-visible:ring-red-500",
-            // ✅ si NO hay error, tu borde suave actual
-            !error && "border-gold/10",
-            className
-          )}
           {...props}
+          className={[
+            "h-11 w-full rounded-md border bg-white/5 px-4 text-sm text-text-light placeholder:text-muted outline-none",
+            "border-white/15 focus:ring-2 focus:ring-white/20 focus:border-white/25",
+            error ? "border-red-500/70 focus:border-red-500/70" : "",
+            className,
+          ].join(" ")}
+          aria-invalid={!!error}
         />
-        {error ? <p className="text-sm text-red-600">{error}</p> : null}
+        {error ? (
+          <p className="mt-1 text-xs text-red-400">{error}</p>
+        ) : null}
       </div>
     );
   }
 );
 
 Input.displayName = "Input";
+
+export { Input };
+

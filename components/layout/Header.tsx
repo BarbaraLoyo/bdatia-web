@@ -1,11 +1,9 @@
-'use client';
+'use client'
 
 import { useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { scrollToSection } from '@/lib/utils'
-import LanguageSwitcher from '@/components/layout/LanguageSwitcher'
-
 
 const navigation = [
   { name: 'Servicios', href: '#servicios' },
@@ -47,13 +45,9 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Desktop: Language + CTA */}
-          <div className="hidden md:flex items-center gap-3">
-            <LanguageSwitcher />
-            <Button
-              onClick={() => handleNavClick('#contacto')}
-              variant="primary"
-            >
+          {/* Desktop CTA */}
+          <div className="hidden md:block">
+            <Button onClick={() => handleNavClick('#contacto')} variant="primary">
               Solicitar consulta
             </Button>
           </div>
@@ -68,9 +62,19 @@ export function Header() {
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 )}
               </svg>
             </button>
@@ -80,12 +84,7 @@ export function Header() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden border-t border-muted/20">
-            <div className="px-2 pt-2 pb-3 space-y-2">
-              {/* Mobile: Language Switcher */}
-              <div className="px-3 pt-2">
-                <LanguageSwitcher />
-              </div>
-
+            <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <button
                   key={item.name}
