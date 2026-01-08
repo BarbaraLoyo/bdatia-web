@@ -16,6 +16,9 @@ export function Footer() {
     <footer className="bg-night text-text-light border-t border-muted/20">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="flex justify-end md:col-span-3">
+            <div id="google_translate_element" />
+            </div>
           {/* Brand */}
           <div className="space-y-4">
             <div className="text-xl font-bold">BDatia</div>
